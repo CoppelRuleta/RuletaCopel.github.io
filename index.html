@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ruleta Coppel</title>
+  <style>
+    :root{
+      --coppel-yellow:#FFD100;
+      --coppel-blue:#0B4DB3;
+      --ink:#0b1220;
+      --card:#ffffff;
+      --bg1:#0b1b3a;
+      --bg2:#061026;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue";
+      color:#fff;
+      background:
+        radial-gradient(1000px 600px at 20% 10%, rgba(255,209,0,.25), transparent 60%),
+        radial-gradient(800px 500px at 80% 20%, rgba(11,77,179,.35), transparent 60%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:22px;
+    }
+    .wrap{
+      width:min(980px, 100%);
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){
+      .wrap{grid-template-columns:1fr; }
+    }
+
+    .card{
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 18px 60px rgba(0,0,0,.35);
+      border-radius: 22px;
+      overflow:hidden;
+      position:relative;
+      backdrop-filter: blur(10px);
+    }
+
+    .header{
+      padding:18px 18px 10px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+    }
+    .logo{
+      width:44px; height:44px;
+      border-radius:14px;
+      background: linear-gradient(135deg, var(--coppel-yellow), #ffea85);
+      display:grid; place-items:center;
+      box-shadow: 0 10px 25px rgba(255,209,0,.25);
+      border:1px solid rgba(255,255,255,.25);
+    }
+    .logo svg{width:26px;height:26px}
+    .title{
+      line-height:1.15;
+    }
+    .title h1{
+      margin:0;
+      font-size:18px;
+      letter-spacing:.2px;
+    }
+    .title p{
+      margin:4px 0 0;
+      font-size:12.5px;
+      opacity:.85;
+    }
+
+    .badge{
+      display:flex; gap:8px; flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .pill{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      background: rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.18);
+      white-space:nowrap;
+    }
+    .pill strong{color:var(--coppel-yellow)}
+
+    .stage{
+      padding: 8px 18px 18px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+      align-items:center;
+      justify-items:center;
+    }
+
+    .wheel-area{
+      width:min(520px, 100%);
+      aspect-ratio:1 / 1;
+      position:relative;
+      display:grid;
+      place-items:center;
+    }
+    canvas{
+      width:100%;
+      height:100%;
+      border-radius:999px;
+      background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.12), rgba(255,255,255,.02) 55%, rgba(0,0,0,.25) 100%);
+      box-shadow: 0 22px 70px rgba(0,0,0,.45);
+      border: 1px solid rgba(255,255,255,.18);
+    }
+
+    /* Puntero */
+    .pointer{
+      position:absolute;
+      top:-8px;
+      left:50%;
+      transform:translateX(-50%);
+      width:0;height:0;
+      border-left:18px solid transparent;
+      border-right:18px solid transparent;
+      border-top:34px solid var(--coppel-yellow);
+      filter: drop-shadow(0 10px 12px rgba(0,0,0,.35));
+    }
+    .pointer::after{
+      content:"";
+      position:absolute;
+      left:-8px; top:-29px;
+      width:16px; height:16px;
+      border-radius:50%;
+      background: #fff;
+      border: 2px solid rgba(0,0,0,.18);
+    }
+
+    /* Centro */
+    .hub{
+      position:absolute;
+      inset:auto;
+      width: 34%;
+      aspect-ratio:1/1;
+      border-radius:999px;
+      background: radial-gradient(circle at 35% 30%, #ffffff, #f0f2ff 55%, #c9d2ff 100%);
+      border: 1px solid rgba(255,255,255,.6);
+      box-shadow: inset 0 6px 24px rgba(0,0,0,.15), 0 12px 40px rgba(0,0,0,.35);
+      display:grid;
+      place-items:center;
+      user-select:none;
+    }
+    .hub .hub-inner{
+      width:78%;
+      height:78%;
+      border-radius:999px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,209,0,.95), rgba(11,77,179,.12) 55%, rgba(0,0,0,.12));
+      border: 1px solid rgba(0,0,0,.06);
+      display:grid;
+      place-items:center;
+      text-align:center;
+      padding:10px;
+    }
+    .hub .hub-inner .big{
+      font-weight:900;
+      color:#0b1b3a;
+      font-size:14px;
+      letter-spacing:.4px;
+    }
+    .hub .hub-inner .small{
+      margin-top:4px;
+      font-size:11px;
+      color:#0b1b3a;
+      opacity:.9;
+      font-weight:700;
+    }
+
+    .controls{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:center;
+      width:100%;
+    }
+    button{
+      appearance:none;
+      border:none;
+      border-radius:16px;
+      padding:12px 14px;
+      font-weight:800;
+      cursor:pointer;
+      transition: transform .06s ease, filter .2s ease, opacity .2s ease;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      letter-spacing:.2px;
+      user-select:none;
+    }
+    button:active{transform: translateY(1px) scale(.99);}
+    .btn-primary{
+      background: linear-gradient(135deg, var(--coppel-yellow), #ffe98a);
+      color:#0b1b3a;
+      box-shadow: 0 16px 40px rgba(255,209,0,.25);
+    }
+    .btn-ghost{
+      background: rgba(255,255,255,.12);
+      color:#fff;
+      border: 1px solid rgba(255,255,255,.18);
+    }
+    .btn-primary[disabled],
+    .btn-ghost[disabled]{opacity:.55; cursor:not-allowed;}
+
+    .sidebar{
+      padding: 18px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+    .panel{
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 18px;
+      padding: 14px;
+    }
+    .panel h2{
+      margin:0 0 8px;
+      font-size:14px;
+      letter-spacing:.2px;
+    }
+    .panel p{
+      margin:0;
+      font-size:12.5px;
+      opacity:.86;
+      line-height:1.45;
+    }
+
+    .prizes{
+      margin-top:10px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:10px;
+    }
+    .prize{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      padding:10px;
+      border-radius:16px;
+      background: rgba(0,0,0,.18);
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    .ic{
+      width:38px; height:38px;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.14);
+      flex: 0 0 auto;
+    }
+    .prize .txt{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      min-width:0;
+    }
+    .prize .txt .name{
+      font-weight:800;
+      font-size:13px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .prize .txt .tier{
+      font-size:11px;
+      opacity:.8;
+    }
+    .tag{
+      display:inline-block;
+      padding:2px 8px;
+      border-radius:999px;
+      font-size:10.5px;
+      font-weight:900;
+      letter-spacing:.3px;
+      margin-left:8px;
+      vertical-align:middle;
+    }
+    .tag.gold{background: rgba(255,209,0,.22); color: #ffe98a; border:1px solid rgba(255,209,0,.35);}
+    .tag.blue{background: rgba(11,77,179,.22); color: #a9c5ff; border:1px solid rgba(169,197,255,.25);}
+    .tag.gray{background: rgba(255,255,255,.10); color: rgba(255,255,255,.85); border:1px solid rgba(255,255,255,.16);}
+
+    .result{
+      font-size:12.5px;
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      background: rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.16);
+      line-height:1.45;
+      min-height:44px;
+    }
+    .result strong{color: var(--coppel-yellow)}
+
+    /* Confetti layer */
+    .confetti{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      overflow:hidden;
+    }
+    .confetti i{
+      position:absolute;
+      width:10px; height:14px;
+      border-radius: 3px;
+      opacity:.95;
+      transform: translateY(-40px) rotate(0deg);
+      animation: fall linear forwards;
+      box-shadow: 0 10px 18px rgba(0,0,0,.25);
+    }
+    @keyframes fall{
+      to{
+        transform: translateY(calc(100vh + 60px)) rotate(520deg);
+      }
+    }
+
+    /* Footer hint */
+    .hint{
+      font-size:11.5px;
+      opacity:.75;
+      margin-top:8px;
+    }
+    code.kbd{
+      background: rgba(0,0,0,.25);
+      border:1px solid rgba(255,255,255,.12);
+      padding:2px 6px;
+      border-radius:8px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size:11px;
+      color:#fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="confetti" id="confetti"></div>
+
+  <div class="wrap">
+    <section class="card">
+      <div class="header">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">
+            <!-- “Sol” simplificado tipo Coppel -->
+            <svg viewBox="0 0 64 64" fill="none">
+              <path d="M32 10l3.2 8.4 8.8-.6-7 5.4 2.6 8.5-7.6-4.7-7.6 4.7 2.6-8.5-7-5.4 8.8.6L32 10Z" fill="#0B4DB3"/>
+              <circle cx="32" cy="34" r="12" fill="#0B4DB3" opacity=".9"/>
+              <circle cx="32" cy="34" r="6.5" fill="#FFD100"/>
+            </svg>
+          </div>
+          <div class="title">
+            <h1>Ruleta Coppel</h1>
+            <p>Gira y gana — versión creativa con íconos tipo sticker ✨</p>
+          </div>
+        </div>
+        <div class="badge">
+          <span class="pill">Premio <strong>Mayor</strong> 🏆</span>
+          <span class="pill">Premio <strong>Normal</strong> 🎁</span>
+          <span class="pill">Premio <strong>Básico</strong> ⭐</span>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="wheel-area">
+          <div class="pointer" aria-hidden="true"></div>
+          <canvas id="wheel" width="900" height="900" aria-label="Ruleta"></canvas>
+          <div class="hub" aria-hidden="true">
+            <div class="hub-inner">
+              <div class="big">GIRA</div>
+              <div class="small">y elige tu suerte</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button class="btn-primary" id="spinBtn">
+            <span aria-hidden="true">🎡</span> Girar
+          </button>
+          <button class="btn-ghost" id="shuffleBtn" title="Reordenar premios">
+            <span aria-hidden="true">🔀</span> Mezclar premios
+          </button>
+          <button class="btn-ghost" id="soundBtn" title="Activar/Desactivar sonido">
+            <span aria-hidden="true">🔊</span> Sonido
+          </button>
+        </div>
+
+        <div class="result" id="result" role="status" aria-live="polite">
+          Dale a <strong>Girar</strong> y que caiga el premio 🔥
+        </div>
+
+        <div class="hint">
+          Tip: si quieres cambiar premios, edita el arreglo <code class="kbd">segments</code> en el script.
+        </div>
+      </div>
+    </section>
+
+    <aside class="card">
+      <div class="sidebar">
+        <div class="panel">
+          <h2>Premios en la ruleta</h2>
+          <p>Los colores están alternados (azul/amarillo/gris) para que se vea más atractivo y parejo.</p>
+
+          <div class="prizes" id="prizeList"></div>
+        </div>
+
+        <div class="panel">
+          <h2>Personalización rápida</h2>
+          <p>
+            Puedes cambiar: texto, cantidad de secciones, probabilidades (si quieres),
+            y también reemplazar los íconos por imágenes reales (URLs) si lo deseas.
+          </p>
+          <p class="hint">
+            Si quieres que lo deje idéntico a tu estilo anterior (paleta exacta, premios, tamaño para TV, etc.),
+            dime cuántas secciones quieres y los premios exactos.
+          </p>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    // ====== Íconos tipo “sticker” (SVG) ======
+    // Los pintamos dentro del canvas como mini dibujos.
+    // (Si prefieres imágenes reales, puedo adaptar a cargar PNG/JPG también.)
+    const iconSvgs = {
+      trophy: `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+          <path d="M18 10h28v10c0 8-6 14-14 14S18 28 18 20V10Z" fill="#FFD100"/>
+          <path d="M24 34h16v8c0 4-3 7-8 7s-8-3-8-7v-8Z" fill="#0B4DB3" opacity=".9"/>
+          <path d="M22 52h20v6H22z" fill="#fff" opacity=".9"/>
+          <path d="M18 12H8v8c0 7 5 12 12 12" fill="none" stroke="#FFD100" stroke-width="4" stroke-linecap="round"/>
+          <path d="M46 12h10v8c0 7-5 12-12 12" fill="none" stroke="#FFD100" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="32" cy="22" r="4" fill="#fff" opacity=".9"/>
+        </svg>
+      `,
+      gift: `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+          <path d="M10 26h44v28H10z" fill="#fff" opacity=".92"/>
+          <path d="M10 26h44v10H10z" fill="#FFD100"/>
+          <path d="M28 26h8v28h-8z" fill="#0B4DB3"/>
+          <path d="M22 22c0-6 6-8 10-2-1-8-12-6-10 2Z" fill="#0B4DB3" opacity=".9"/>
+          <path d="M42 22c0-6-6-8-10-2 1-8 12-6 10 2Z" fill="#0B4DB3" opacity=".9"/>
+          <path d="M10 26h44" stroke="#0b1220" stroke-opacity=".15" stroke-width="2"/>
+        </svg>
+      `,
+      cart: `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+          <path d="M10 14h8l5 28h26l6-20H22" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="28" cy="50" r="4" fill="#FFD100"/>
+          <circle cx="46" cy="50" r="4" fill="#FFD100"/>
+          <path d="M24 30h28" stroke="#FFD100" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+      `,
+      percent: `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+          <circle cx="20" cy="20" r="8" fill="#FFD100"/>
+          <circle cx="44" cy="44" r="8" fill="#FFD100"/>
+          <path d="M16 48 48 16" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+        </svg>
+      `,
+      star: `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+          <path d="M32 8l7 16 17 2-13 11 4 17-15-9-15 9 4-17L8 26l17-2 7-16Z" fill="#FFD100"/>
+          <path d="M32 16l4.5 10 11 1.2-8.4 7.2 2.5 11-9.6-5.8-9.6 5.8 2.5-11-8.4-7.2 11-1.2 4.5-10Z" fill="#0B4DB3" opacity=".25"/>
+        </svg>
+      `,
+      phone: `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+          <rect x="18" y="8" width="28" height="48" rx="6" fill="#fff" opacity=".92"/>
+          <rect x="22" y="14" width="20" height="30" rx="3" fill="#0B4DB3" opacity=".85"/>
+          <circle cx="32" cy="50" r="3" fill="#FFD100"/>
+        </svg>
+      `,
+      ticket: `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+          <path d="M10 22c4 0 6-2 6-6h32c0 4 2 6 6 6v20c-4 0-6 2-6 6H16c0-4-2-6-6-6V22Z" fill="#fff" opacity=".92"/>
+          <path d="M24 18v28" stroke="#FFD100" stroke-width="4" stroke-dasharray="6 6" stroke-linecap="round"/>
+          <path d="M30 26h18M30 34h14" stroke="#0B4DB3" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+      `,
+    };
+
+    function svgToImage(svg, size=64){
+      const svg64 = btoa(unescape(encodeURIComponent(svg)));
+      const img = new Image();
+      img.width = size; img.height = size;
+      img.src = `data:image/svg+xml;base64,${svg64}`;
+      return img;
+    }
+
+    const icons = {};
+    for (const [k,v] of Object.entries(iconSvgs)) icons[k] = svgToImage(v);
+
+    // ====== Configuración de la ruleta ======
+    // Colores alternados para que no queden dos iguales juntos.
+    const palette = {
+      major: { fill: "#FFD100", stroke:"#ffe98a", text:"#0b1b3a" }, // premio mayor
+      normal:{ fill: "#0B4DB3", stroke:"#a9c5ff", text:"#ffffff" }, // premio normal
+      basic: { fill: "rgba(255,255,255,.14)", stroke:"rgba(255,255,255,.35)", text:"#ffffff" } // básico
+    };
+
+    let segments = [
+      { label: "Pantalla 43”", tier:"Mayor", icon:"trophy", colorKey:"major" },
+      { label: "Vale $300", tier:"Normal", icon:"ticket", colorKey:"normal" },
+      { label: "5% Descuento", tier:"Básico", icon:"percent", colorKey:"basic" },
+      { label: "Audífonos", tier:"Normal", icon:"gift", colorKey:"normal" },
+      { label: "Vale $100", tier:"Básico", icon:"ticket", colorKey:"basic" },
+      { label: "Smartphone", tier:"Mayor", icon:"phone", colorKey:"major" },
+      { label: "Compra Gratis*", tier:"Mayor", icon:"cart", colorKey:"major" },
+      { label: "Sticker Estrella", tier:"Básico", icon:"star", colorKey:"basic" },
+      { label: "Vale $200", tier:"Normal", icon:"ticket", colorKey:"normal" },
+    ];
+
+    // Para que se vea “alternado”: reordenamos por patrón mayor/normal/básico cuando sea posible.
+    function interleaveByTier(list){
+      const major = list.filter(s => s.colorKey === "major");
+      const normal = list.filter(s => s.colorKey === "normal");
+      const basic = list.filter(s => s.colorKey === "basic");
+      const out = [];
+      while (major.length || normal.length || basic.length){
+        if (normal.length) out.push(normal.shift());
+        if (basic.length) out.push(basic.shift());
+        if (major.length) out.push(major.shift());
+      }
+      return out;
+    }
+    segments = interleaveByTier(segments);
+
+    // ====== Canvas drawing ======
+    const canvas = document.getElementById("wheel");
+    const ctx = canvas.getContext("2d");
+    const resultEl = document.getElementById("result");
+    const prizeListEl = document.getElementById("prizeList");
+
+    // Animación
+    let angle = 0;           // ángulo actual
+    let angVel = 0;          // velocidad
+    let spinning = false;
+    let soundOn = true;
+
+    // Sonidos (muy ligeros, sin archivos externos)
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function beep(freq=440, dur=0.06, type="sine", gain=0.035){
+      if (!soundOn) return;
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      o.type = type;
+      o.frequency.value = freq;
+      g.gain.value = gain;
+      o.connect(g); g.connect(audioCtx.destination);
+      o.start();
+      o.stop(audioCtx.currentTime + dur);
+    }
+
+    function drawWheel(){
+      const w = canvas.width, h = canvas.height;
+      const cx = w/2, cy = h/2;
+      const radius = Math.min(cx, cy) * 0.92;
+
+      ctx.clearRect(0,0,w,h);
+
+      // Aro externo brillante
+      ctx.beginPath();
+      ctx.arc(cx,cy,radius*1.03,0,Math.PI*2);
+      ctx.strokeStyle = "rgba(255,255,255,.22)";
+      ctx.lineWidth = radius*0.06;
+      ctx.stroke();
+
+      const N = segments.length;
+      const arc = (Math.PI*2)/N;
+
+      for (let i=0;i<N;i++){
+        const seg = segments[i];
+        const theme = palette[seg.colorKey];
+        const start = angle + i*arc;
+        const end   = start + arc;
+
+        // Sector
+        ctx.beginPath();
+        ctx.moveTo(cx,cy);
+        ctx.arc(cx,cy,radius,start,end);
+        ctx.closePath();
+        ctx.fillStyle = theme.fill;
+        ctx.fill();
+
+        ctx.strokeStyle = theme.stroke;
+        ctx.lineWidth = 6;
+        ctx.stroke();
+
+        // Texto e ícono (rotados al sector)
+        ctx.save();
+        ctx.translate(cx,cy);
+        ctx.rotate(start + arc/2);
+
+        // Icono
+        const img = icons[seg.icon];
+        const iconSize = radius*0.16;
+        const iconX = radius*0.60;
+        const iconY = -iconSize/2;
+
+        // Fondo redondito del ícono para estilo sticker
+        ctx.beginPath();
+        ctx.roundRect(iconX-10, iconY-10, iconSize+20, iconSize+20, 18);
+        ctx.fillStyle = "rgba(0,0,0,.18)";
+        ctx.fill();
+
+        if (img && img.complete){
+          ctx.drawImage(img, iconX, iconY, iconSize, iconSize);
+        }
+
+        // Texto
+        const maxWidth = radius*0.46;
+        ctx.fillStyle = theme.text;
+        ctx.font = `900 ${Math.floor(radius*0.06)}px ui-sans-serif, system-ui`;
+        ctx.textAlign = "left";
+        ctx.textBaseline = "middle";
+
+ 
