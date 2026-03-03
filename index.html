@@ -29,7 +29,6 @@
         radial-gradient(900px 520px at 80% 15%, rgba(11,77,179,.35), transparent 60%),
         linear-gradient(180deg, var(--bg1), var(--bg2));
     }
-
     .wrap{
       width:min(1050px, 100%);
       display:grid;
@@ -37,9 +36,7 @@
       gap:16px;
       align-items:stretch;
     }
-    @media (max-width: 920px){
-      .wrap{grid-template-columns:1fr}
-    }
+    @media (max-width: 920px){ .wrap{grid-template-columns:1fr} }
 
     .card{
       background: var(--card);
@@ -58,9 +55,7 @@
       justify-content:space-between;
       gap:12px;
     }
-    .brand{
-      display:flex; gap:12px; align-items:center;
-    }
+    .brand{display:flex; gap:12px; align-items:center;}
     .logo{
       width:48px;height:48px;border-radius:16px;
       display:grid;place-items:center;
@@ -69,12 +64,7 @@
       box-shadow: 0 14px 30px rgba(255,209,0,.22);
     }
     .logo svg{width:28px;height:28px}
-    h1{
-      margin:0;
-      font-size:18px;
-      letter-spacing:.2px;
-      line-height:1.15;
-    }
+    h1{margin:0;font-size:18px;letter-spacing:.2px;line-height:1.15;}
     .subtitle{
       margin:6px 0 0;
       opacity:.86;
@@ -117,7 +107,6 @@
       box-shadow: 0 22px 70px rgba(0,0,0,.45);
       background: radial-gradient(circle at 35% 28%, rgba(255,255,255,.12), rgba(255,255,255,.03) 55%, rgba(0,0,0,.25));
     }
-
     .pointer{
       position:absolute;
       top:-10px;
@@ -137,7 +126,6 @@
       background:#fff;
       border:2px solid rgba(0,0,0,.18);
     }
-
     .hub{
       position:absolute;
       width: 34%;
@@ -161,20 +149,8 @@
       background: radial-gradient(circle at 30% 30%, rgba(255,209,0,.98), rgba(11,77,179,.10) 55%, rgba(0,0,0,.10));
       border:1px solid rgba(0,0,0,.06);
     }
-    .hubInner .big{
-      color:#0b1b3a;
-      font-weight:900;
-      font-size:14px;
-      letter-spacing:.6px;
-    }
-    .hubInner .small{
-      color:#0b1b3a;
-      font-weight:800;
-      font-size:11px;
-      opacity:.92;
-      margin-top:4px;
-      line-height:1.2;
-    }
+    .hubInner .big{color:#0b1b3a;font-weight:900;font-size:14px;letter-spacing:.6px;}
+    .hubInner .small{color:#0b1b3a;font-weight:800;font-size:11px;opacity:.92;margin-top:4px;line-height:1.2;}
 
     .controls{
       display:flex;
@@ -229,107 +205,55 @@
       border:1px solid rgba(255,255,255,.14);
       flex: 0 0 auto;
     }
-    .result .textBox{
-      display:flex;
-      flex-direction:column;
-      gap:3px;
-      min-width:0;
-    }
-    .result .textBox .line1{
-      font-weight:900;
-      font-size:13.5px;
-      line-height:1.2;
-    }
+    .result .textBox{display:flex;flex-direction:column;gap:3px;min-width:0;}
+    .result .textBox .line1{font-weight:900;font-size:13.5px;line-height:1.2;}
     .result .textBox .line1 strong{color: var(--coppel-yellow)}
-    .result .textBox .line2{
-      font-size:12px;
-      opacity:.84;
-    }
+    .result .textBox .line2{font-size:12px;opacity:.84;}
 
-    /* Sidebar */
-    .side{
-      padding:18px;
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-    }
-    .panel{
-      padding:14px;
-      border-radius:18px;
-      background: rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.14);
-    }
-    .panel h2{
-      margin:0 0 8px;
-      font-size:14px;
-      letter-spacing:.2px;
-    }
-    .panel p{
-      margin:0;
-      font-size:12.5px;
-      opacity:.86;
-      line-height:1.45;
-    }
-    .list{
-      margin-top:10px;
-      display:grid;
-      gap:10px;
-    }
-    .item{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      padding:10px;
-      border-radius:16px;
-      background: rgba(0,0,0,.18);
-      border:1px solid rgba(255,255,255,.12);
-    }
-    .item .mini{
-      width:36px;height:36px;border-radius:14px;
-      display:grid;place-items:center;
-      background: rgba(255,255,255,.10);
-      border:1px solid rgba(255,255,255,.14);
-      flex: 0 0 auto;
-    }
-    .item .label{
-      font-weight:850;
-      font-size:13px;
-      line-height:1.2;
-      min-width:0;
-    }
+    .side{padding:18px;display:flex;flex-direction:column;gap:14px;}
+    .panel{padding:14px;border-radius:18px;background: rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);}
+    .panel h2{margin:0 0 8px;font-size:14px;letter-spacing:.2px;}
+    .panel p{margin:0;font-size:12.5px;opacity:.86;line-height:1.45;}
+    .list{margin-top:10px;display:grid;gap:10px;}
+    .item{display:flex;gap:10px;align-items:center;padding:10px;border-radius:16px;background: rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.12);}
+    .item .mini{width:36px;height:36px;border-radius:14px;display:grid;place-items:center;background: rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.14);flex: 0 0 auto;}
+    .item .label{font-weight:850;font-size:13px;line-height:1.2;min-width:0;}
 
-    /* Confetti */
-    .confetti{
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      overflow:hidden;
-    }
+    .confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;}
     .confetti i{
-      position:absolute;
-      width:10px;height:14px;
-      border-radius:3px;
-      opacity:.95;
+      position:absolute;width:10px;height:14px;border-radius:3px;opacity:.95;
       transform: translateY(-40px) rotate(0deg);
       animation: fall linear forwards;
       box-shadow: 0 10px 18px rgba(0,0,0,.25);
     }
-    @keyframes fall{
-      to{ transform: translateY(calc(100vh + 60px)) rotate(520deg); }
+    @keyframes fall{ to{ transform: translateY(calc(100vh + 60px)) rotate(520deg); } }
+
+    /* Debug badge */
+    .debug{
+      position:fixed;
+      left:12px; bottom:12px;
+      padding:8px 10px;
+      border-radius:12px;
+      background: rgba(0,0,0,.35);
+      border:1px solid rgba(255,255,255,.18);
+      font-size:12px;
+      max-width: min(92vw, 520px);
+      z-index:9999;
+      white-space:pre-wrap;
     }
+    .debug strong{color:var(--coppel-yellow)}
   </style>
 </head>
 
 <body>
   <div class="confetti" id="confetti"></div>
+  <div class="debug" id="debug"><strong>JS:</strong> cargando…</div>
 
   <div class="wrap">
-    <!-- MAIN -->
     <section class="card">
       <div class="top">
         <div class="brand">
           <div class="logo" aria-hidden="true">
-            <!-- “sol” simplificado -->
             <svg viewBox="0 0 64 64" fill="none">
               <path d="M32 10l3.2 8.4 8.8-.6-7 5.4 2.6 8.5-7.6-4.7-7.6 4.7 2.6-8.5-7-5.4 8.8.6L32 10Z" fill="#0B4DB3"/>
               <circle cx="32" cy="34" r="12" fill="#0B4DB3" opacity=".92"/>
@@ -350,7 +274,7 @@
       <div class="stage">
         <div class="wheelArea">
           <div class="pointer" aria-hidden="true"></div>
-          <canvas id="wheel" width="900" height="900" aria-label="Ruleta"></canvas>
+          <canvas id="wheel" width="900" height="900"></canvas>
           <div class="hub" aria-hidden="true">
             <div class="hubInner">
               <div class="big">GIRA</div>
@@ -361,18 +285,12 @@
 
         <div class="controls">
           <button class="primary" id="spinBtn"><span aria-hidden="true">🎡</span> Girar ruleta</button>
-          <button class="ghost" id="soundBtn" title="Activar/Desactivar sonido"><span aria-hidden="true">🔊</span> Sonido</button>
-          <button class="ghost" id="resetBtn" title="Reiniciar resultado"><span aria-hidden="true">🧼</span> Limpiar</button>
+          <button class="ghost" id="soundBtn"><span aria-hidden="true">🔊</span> Sonido</button>
+          <button class="ghost" id="resetBtn"><span aria-hidden="true">🧼</span> Limpiar</button>
         </div>
 
         <div class="result" id="result" role="status" aria-live="polite">
-          <div class="iconBox" id="resultIcon" aria-hidden="true">
-            <!-- sticker default -->
-            <svg width="28" height="28" viewBox="0 0 64 64">
-              <path d="M32 8l7 16 17 2-13 11 4 17-15-9-15 9 4-17L8 26l17-2 7-16Z" fill="#FFD100"/>
-              <path d="M20 44c6 6 18 6 24 0" stroke="#0B4DB3" stroke-width="5" stroke-linecap="round"/>
-            </svg>
-          </div>
+          <div class="iconBox" id="resultIcon" aria-hidden="true">⭐</div>
           <div class="textBox">
             <div class="line1">Dale a <strong>Girar ruleta</strong> y descubre tu premio ✨</div>
             <div class="line2">Tip: si cae “Segunda oportunidad”, puedes volver a girar.</div>
@@ -381,7 +299,6 @@
       </div>
     </section>
 
-    <!-- SIDE -->
     <aside class="card">
       <div class="side">
         <div class="panel">
@@ -392,122 +309,59 @@
 
         <div class="panel">
           <h2>Mensaje al cliente</h2>
-          <p>
-            “En Coppel valoramos tu preferencia. <strong>Tu confianza tiene recompensa</strong> — disfruta tu beneficio en tu próxima compra.”
-          </p>
+          <p>“En Coppel valoramos tu preferencia. <strong>Tu confianza tiene recompensa</strong> — disfruta tu beneficio en tu próxima compra.”</p>
         </div>
       </div>
     </aside>
   </div>
 
   <script>
-    // ===== Stickers (SVG inline) =====
-    const STICKERS = {
-      muebles: `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-          <rect x="10" y="26" width="44" height="18" rx="6" fill="#0B4DB3"/>
-          <rect x="14" y="30" width="36" height="10" rx="5" fill="#FFD100"/>
-          <rect x="14" y="44" width="6" height="10" rx="2" fill="#ffffff" opacity=".9"/>
-          <rect x="44" y="44" width="6" height="10" rx="2" fill="#ffffff" opacity=".9"/>
-          <path d="M16 26c0-7 8-10 12-4M48 26c0-7-8-10-12-4" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".9"/>
-        </svg>
-      `,
-      ropa: `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-          <path d="M20 18l6-6h12l6 6 8 6-6 10v24H18V34l-6-10 8-6Z" fill="#0B4DB3"/>
-          <path d="M26 12l6 8 6-8" stroke="#FFD100" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M22 30h20" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".9"/>
-        </svg>
-      `,
-      optica: `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-          <circle cx="20" cy="34" r="10" fill="#FFD100"/>
-          <circle cx="44" cy="34" r="10" fill="#FFD100"/>
-          <path d="M30 34h4" stroke="#0B4DB3" stroke-width="5" stroke-linecap="round"/>
-          <path d="M10 30c3-5 8-8 14-8M54 30c-3-5-8-8-14-8" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".95"/>
-        </svg>
-      `,
-      visita: `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-          <rect x="14" y="12" width="36" height="40" rx="8" fill="#0B4DB3"/>
-          <rect x="18" y="18" width="28" height="10" rx="5" fill="#FFD100"/>
-          <rect x="18" y="32" width="18" height="6" rx="3" fill="#fff" opacity=".9"/>
-          <rect x="18" y="42" width="22" height="6" rx="3" fill="#fff" opacity=".9"/>
-          <circle cx="44" cy="44" r="9" fill="#FFD100"/>
-          <path d="M44 39v6l4 2" stroke="#0B4DB3" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      `,
-      online: `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-          <rect x="14" y="10" width="36" height="44" rx="8" fill="#ffffff" opacity=".92"/>
-          <rect x="18" y="16" width="28" height="24" rx="4" fill="#0B4DB3"/>
-          <path d="M22 34l6-8 6 6 8-10" stroke="#FFD100" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="32" cy="48" r="3.2" fill="#FFD100"/>
-        </svg>
-      `,
-      retry: `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-          <path d="M18 26a16 16 0 1 1 2 18" fill="none" stroke="#FFD100" stroke-width="6" stroke-linecap="round"/>
-          <path d="M16 20v12h12" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity=".92"/>
-          <circle cx="40" cy="22" r="6" fill="#0B4DB3" opacity=".92"/>
-        </svg>
-      `,
-      pct: `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-          <circle cx="22" cy="22" r="8" fill="#FFD100"/>
-          <circle cx="42" cy="42" r="8" fill="#FFD100"/>
-          <path d="M18 46 46 18" stroke="#0B4DB3" stroke-width="6" stroke-linecap="round"/>
-        </svg>
-      `
-    };
+  (function(){
+    const dbg = document.getElementById("debug");
+    function log(msg){ dbg.textContent = msg; }
 
-    // convierte SVG a Image (data URL)
-    function svgToImg(svg){
-      const b64 = btoa(unescape(encodeURIComponent(svg)));
-      const img = new Image();
-      img.src = "data:image/svg+xml;base64," + b64;
-      return img;
-    }
+    window.addEventListener("error", (e)=>{
+      dbg.innerHTML = "<strong>Error JS:</strong> " + (e.message || "desconocido");
+    });
 
-    // ===== Premios (exacto como pediste) =====
+    // ===== Stickers simples (sin base64 para evitar fallos) =====
+    // En canvas dibujamos iconos con formas básicas (100% compatible).
+    // Aun así, en la lista lateral usamos emojis + textos.
     const segments = [
-      { label: "10% de descuento en\nMUEBLES", sticker:"muebles" },
-      { label: "10% de descuento en\nROPA", sticker:"ropa" },
-      { label: "10% de descuento en\nÓPTICA", sticker:"optica" },
-      { label: "10% de descuento en tu\nPRÓXIMA VISITA", sticker:"visita" },
-      { label: "SEGUNDA\nOPORTUNIDAD", sticker:"retry" },
-      { label: "10% de descuento en tu\nPRÓXIMA COMPRA EN LÍNEA", sticker:"online" },
+      { label: "10% de descuento en\nMUEBLES", icon:"🛋️" },
+      { label: "10% de descuento en\nROPA", icon:"👕" },
+      { label: "10% de descuento en\nÓPTICA", icon:"👓" },
+      { label: "10% de descuento en tu\nPRÓXIMA VISITA", icon:"🕒" },
+      { label: "SEGUNDA\nOPORTUNIDAD", icon:"🔁" },
+      { label: "10% de descuento en tu\nPRÓXIMA COMPRA EN LÍNEA", icon:"📱" },
     ];
 
-    // Alternamos colores Coppel
-    const sliceThemes = [
-      { fill:"#0B4DB3", text:"#ffffff" }, // azul
-      { fill:"#FFD100", text:"#0b1b3a" }, // amarillo
-    ];
+    const colors = ["#0B4DB3", "#FFD100"]; // azul/amarillo alternados
 
-    const images = {};
-    Object.keys(STICKERS).forEach(k => images[k] = svgToImg(STICKERS[k]));
-
-    // ===== Canvas wheel =====
     const canvas = document.getElementById("wheel");
     const ctx = canvas.getContext("2d");
+    const prizeListEl = document.getElementById("prizeList");
     const resultEl = document.getElementById("result");
     const resultIconEl = document.getElementById("resultIcon");
-    const prizeListEl = document.getElementById("prizeList");
     const spinBtn = document.getElementById("spinBtn");
     const soundBtn = document.getElementById("soundBtn");
     const resetBtn = document.getElementById("resetBtn");
 
-    let angle = 0;
-    let vel = 0;
-    let spinning = false;
-    let soundOn = true;
+    let angle = 0, vel = 0, spinning = false, soundOn = true;
 
-    // sonido muy simple (opcional)
-    const AudioCtx = window.AudioContext || window.webkitAudioContext;
-    const audio = new AudioCtx();
+    // Audio sólo al tocar (evita bloqueo en Android)
+    let audio = null;
+    function ensureAudio(){
+      if(audio) return;
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if(!AudioCtx) return;
+      audio = new AudioCtx();
+    }
     function beep(freq=520, dur=0.05, gain=0.03){
       if(!soundOn) return;
+      ensureAudio();
+      if(!audio) return;
+      if(audio.state === "suspended") audio.resume();
       const o = audio.createOscillator();
       const g = audio.createGain();
       o.frequency.value = freq;
@@ -518,40 +372,26 @@
       o.stop(audio.currentTime + dur);
     }
 
-    function wrapLines(text){
-      // Respeta saltos de línea \n del label
-      return String(text).split("\n");
-    }
+    function splitLines(text){ return String(text).split("\n"); }
 
-    function drawSticker(img, x, y, size){
-      // fondo sticker
-      ctx.save();
+    function roundRect(x,y,w,h,r){
+      const rr = Math.min(r, w/2, h/2);
       ctx.beginPath();
-      const r = size * 0.22;
-      roundRect(ctx, x - 10, y - 10, size + 20, size + 20, r);
-      ctx.fillStyle = "rgba(0,0,0,.18)";
-      ctx.fill();
-      ctx.restore();
-
-      if(img && img.complete){
-        ctx.drawImage(img, x, y, size, size);
-      }else{
-        // fallback si no ha cargado
-        ctx.beginPath();
-        ctx.arc(x+size/2, y+size/2, size/2, 0, Math.PI*2);
-        ctx.fillStyle = "rgba(255,255,255,.25)";
-        ctx.fill();
-      }
+      ctx.moveTo(x+rr, y);
+      ctx.arcTo(x+w, y, x+w, y+h, rr);
+      ctx.arcTo(x+w, y+h, x, y+h, rr);
+      ctx.arcTo(x, y+h, x, y, rr);
+      ctx.arcTo(x, y, x+w, y, rr);
+      ctx.closePath();
     }
 
     function drawWheel(){
       const W = canvas.width, H = canvas.height;
       const cx = W/2, cy = H/2;
       const radius = Math.min(cx, cy) * 0.90;
-
       ctx.clearRect(0,0,W,H);
 
-      // aro exterior
+      // Aro exterior
       ctx.beginPath();
       ctx.arc(cx, cy, radius*1.05, 0, Math.PI*2);
       ctx.strokeStyle = "rgba(255,255,255,.22)";
@@ -563,58 +403,62 @@
 
       for(let i=0;i<N;i++){
         const seg = segments[i];
-        const theme = sliceThemes[i % sliceThemes.length];
+        const fill = colors[i % 2];
+        const textColor = (fill === "#FFD100") ? "#0b1b3a" : "#ffffff";
+
         const start = angle + i*arc;
         const end = start + arc;
 
-        // sector
+        // Sector
         ctx.beginPath();
         ctx.moveTo(cx,cy);
         ctx.arc(cx,cy,radius,start,end);
         ctx.closePath();
-        ctx.fillStyle = theme.fill;
+        ctx.fillStyle = fill;
         ctx.fill();
 
         ctx.strokeStyle = "rgba(255,255,255,.28)";
         ctx.lineWidth = 6;
         ctx.stroke();
 
-        // contenido: rotado al centro del sector
+        // Contenido
         ctx.save();
         ctx.translate(cx,cy);
         ctx.rotate(start + arc/2);
 
-        // sticker
-        const img = images[seg.sticker];
+        // “Sticker” fondo
         const iconSize = radius*0.16;
-        const iconX = radius*0.60;
+        const iconX = radius*0.62;
         const iconY = -iconSize/2;
-        drawSticker(img, iconX, iconY, iconSize);
+        roundRect(iconX-10, iconY-10, iconSize+20, iconSize+20, iconSize*0.22);
+        ctx.fillStyle = "rgba(0,0,0,.18)";
+        ctx.fill();
 
-        // texto
-        const lines = wrapLines(seg.label);
+        // Emoji como ícono (muy compatible)
+        ctx.font = `900 ${Math.floor(iconSize*0.75)}px ui-sans-serif, system-ui`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillStyle = "#fff";
+        ctx.fillText(seg.icon, iconX + iconSize/2, 0);
 
-        ctx.fillStyle = theme.text;
+        // Texto (multilínea)
+        const lines = splitLines(seg.label);
+        const baseFont = (lines.length >= 3) ? radius*0.050 : radius*0.055;
+        ctx.font = `900 ${Math.floor(baseFont)}px ui-sans-serif, system-ui`;
+        ctx.fillStyle = textColor;
         ctx.textAlign = "left";
         ctx.textBaseline = "middle";
 
-        // Ajuste dinámico: si hay 3 líneas, un poquito más chico
-        const baseFont = (lines.length >= 3) ? radius*0.050 : radius*0.055;
-        ctx.font = `900 ${Math.floor(baseFont)}px ui-sans-serif, system-ui`;
-
         const textX = radius*0.18;
         const lineH = radius*0.065;
-
-        // dibuja líneas centradas verticalmente
         const totalH = (lines.length-1)*lineH;
         const startY = -totalH/2;
-
         for(let k=0;k<lines.length;k++){
           ctx.fillText(lines[k], textX, startY + k*lineH);
         }
 
-        // mini sello "10%" para todos menos segunda oportunidad
-        if(seg.sticker !== "retry"){
+        // Sello 10% (no para segunda oportunidad)
+        if(seg.icon !== "🔁"){
           ctx.save();
           ctx.globalAlpha = 0.95;
           ctx.beginPath();
@@ -624,7 +468,7 @@
           ctx.strokeStyle = "rgba(255,255,255,.25)";
           ctx.lineWidth = 3;
           ctx.stroke();
-          ctx.fillStyle = theme.text;
+          ctx.fillStyle = textColor;
           ctx.font = `900 ${Math.floor(radius*0.040)}px ui-sans-serif, system-ui`;
           ctx.textAlign = "center";
           ctx.fillText("10%", radius*0.18, radius*0.20);
@@ -634,6 +478,124 @@
         ctx.restore();
       }
 
-      // brillo
+      // Brillo
       const grad = ctx.createRadialGradient(cx,cy,radius*0.20,cx,cy,radius*1.05);
-     
+      grad.addColorStop(0,"rgba(255,255,255,.06)");
+      grad.addColorStop(0.6,"rgba(255,255,255,.02)");
+      grad.addColorStop(1,"rgba(0,0,0,.25)");
+      ctx.beginPath();
+      ctx.arc(cx,cy,radius,0,Math.PI*2);
+      ctx.fillStyle = grad;
+      ctx.fill();
+    }
+
+    function getWinner(){
+      const N = segments.length;
+      const arc = (Math.PI*2)/N;
+      const pointerAngle = Math.PI*1.5;
+      const rel = (pointerAngle - angle + Math.PI*2) % (Math.PI*2);
+      const idx = Math.floor(rel / arc) % N;
+      return { index: idx, ...segments[idx] };
+    }
+
+    function popConfetti(){
+      const layer = document.getElementById("confetti");
+      const colors = ["#FFD100", "#0B4DB3", "#ffffff", "rgba(255,255,255,.75)"];
+      for(let i=0;i<110;i++){
+        const p = document.createElement("i");
+        p.style.background = colors[Math.floor(Math.random()*colors.length)];
+        p.style.left = (Math.random()*100) + "vw";
+        p.style.top = (-10 - Math.random()*30) + "px";
+        p.style.animationDuration = (1.7 + Math.random()*1.6) + "s";
+        p.style.width = (8 + Math.random()*10) + "px";
+        p.style.height = (10 + Math.random()*14) + "px";
+        layer.appendChild(p);
+        setTimeout(()=>p.remove(), 3500);
+      }
+    }
+
+    function setResult(seg, extraMsg){
+      const pretty = seg.label.split("\n").join(" ");
+      const isRetry = seg.icon === "🔁";
+
+      resultIconEl.textContent = seg.icon;
+
+      resultEl.querySelector(".line1").innerHTML =
+        isRetry ? `¡Te salió <strong>${pretty}</strong> 🔁`
+               : `¡Felicidades! Ganaste <strong>${pretty}</strong> 🎉`;
+
+      resultEl.querySelector(".line2").textContent =
+        extraMsg || (isRetry
+          ? "Vuelve a girar para descubrir tu premio final."
+          : "Gracias por tu fidelidad. Tu confianza tiene recompensa.");
+
+      popConfetti();
+    }
+
+    function spin(){
+      if(spinning) return;
+      spinning = true;
+      spinBtn.disabled = true;
+
+      vel = 0.30 + Math.random()*0.18;
+      beep(440,0.06,0.03);
+    }
+
+    function animate(){
+      if(spinning){
+        angle += vel;
+        angle %= (Math.PI*2);
+        vel *= 0.985;
+
+        const N = segments.length;
+        const arc = (Math.PI*2)/N;
+        const pointerAngle = Math.PI*1.5;
+        const rel = (pointerAngle - angle + Math.PI*2) % (Math.PI*2);
+        const idxFloat = rel / arc;
+        const nearEdge = Math.abs(idxFloat - Math.round(idxFloat)) < 0.03;
+        if(nearEdge) beep(700,0.02,0.02);
+
+        if(vel < 0.0023){
+          spinning = false;
+          vel = 0;
+
+          const winner = getWinner();
+          if(winner.icon === "🔁"){
+            setResult(winner, "¡Segunda oportunidad activada! Presiona girar otra vez.");
+            spinBtn.disabled = false;
+          }else{
+            setResult(winner);
+            setTimeout(()=>{ spinBtn.disabled = false; }, 600);
+          }
+        }
+      }
+
+      drawWheel();
+      requestAnimationFrame(animate);
+    }
+
+    function renderList(){
+      prizeListEl.innerHTML = "";
+      for(let i=0;i<segments.length;i++){
+        const s = segments[i];
+        const row = document.createElement("div");
+        row.className = "item";
+        row.innerHTML = `
+          <div class="mini" aria-hidden="true">${s.icon}</div>
+          <div class="label">${s.label.split("\n").join(" ")}</div>
+        `;
+        prizeListEl.appendChild(row);
+      }
+    }
+
+    // Eventos
+    spinBtn.addEventListener("click", spin);
+    soundBtn.addEventListener("click", ()=>{
+      soundOn = !soundOn;
+      soundBtn.querySelector("span").textContent = soundOn ? "🔊" : "🔇";
+      beep(520,0.04,0.02);
+    });
+    resetBtn.addEventListener("click", ()=>{
+      resultIconEl.textContent = "⭐";
+      resultEl.querySelector(".line1").innerHTML = `Dale a <strong>Girar ruleta</strong> y descubre tu premio ✨`;
+      resultEl.querySelector(".line2").textContent = `Tip: si cae “Segunda oportunidad”, puedes volver a girar.`;
